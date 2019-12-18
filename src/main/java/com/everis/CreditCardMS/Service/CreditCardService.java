@@ -7,12 +7,22 @@ import reactor.core.publisher.Mono;
 
 public interface CreditCardService
 {
-    //Create Credit Card
-    public Mono<CreditCard> addAccount(CreditCard card);
-
-    //Delete Credit Card
-    public Mono<Void> delAccount(CreditCard card);
-
     //Get all CreditCards from DB
-    public Flux<CreditCard> findAllAccounts();
+    public Flux<CreditCard> findAllCreditCards();
+
+    //Get creditcard by Number
+    public Mono<CreditCard> findCardByNumber(String number);
+
+    //Get credicard by Owner
+    public Mono<CreditCard> findCardByOwner(String owner);
+
+    //Create creditcard data
+    public Mono<CreditCard> addCreditCard(CreditCard card);
+
+    //Update creditcard data
+
+    //Delete creditcard data
+    public Mono<Void> delCard(CreditCard card);
+
+
 }

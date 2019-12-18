@@ -16,21 +16,34 @@ public class CreditCardServiceImpl implements CreditCardService{
     @Autowired
     private CreditCardRepo repo;
 
+    
+    //Get All Credit Cards
+    @Override
+    public Flux<CreditCard> findAllCreditCards() {
+        return repo.findAll();
+    }
+
+    //Get card by Number
+    @Override
+    public Mono<CreditCard> findCardByNumber(String number) {
+        return repo.findByNumber(number);
+    }
+
+    //Get card by Owner
+    @Override
+    public Mono<CreditCard> findCardByOwner(String owner) {
+        return repo.findByOwner(owner);
+    }
+
     //Create Credit Card
     @Override
-    public Mono<CreditCard> addAccount(CreditCard card) {
+    public Mono<CreditCard> addCreditCard(CreditCard card) {
         return repo.save(card);
     }
 
     //Delete Card
     @Override
-    public Mono<Void> delAccount(CreditCard card) {
+    public Mono<Void> delCard(CreditCard card) {
         return repo.delete(card);
     }
-
-    //Get All Credit Cards
-    @Override
-    public Flux<CreditCard> findAllAccounts() {
-        return repo.findAll();
-    }    
 }

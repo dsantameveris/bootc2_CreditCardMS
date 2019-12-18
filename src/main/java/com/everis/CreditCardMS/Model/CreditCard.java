@@ -18,11 +18,11 @@ public class CreditCard
     private String number;
 
     @NotBlank
-    private String owners;
+    private String owner;
+
+    // @NotBlank
+    // private double balance;
 
     @NotBlank
-    private String currency;
-
-    @NotBlank
-    private int balance;
+    private double max;
 }

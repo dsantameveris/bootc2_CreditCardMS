@@ -1,7 +1,7 @@
 package com.everis.CreditCardMS.Controller;
 
+import com.everis.CreditCardMS.DTO.CreditCardDTO;
 import com.everis.CreditCardMS.Model.CreditCard;
-import com.everis.CreditCardMS.Repository.CreditCardRepo;
 import com.everis.CreditCardMS.Service.Impl.CreditCardServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +25,18 @@ public class CreditCardController
     @Autowired
     private CreditCardServiceImpl service;
 
-    //Service Instance
-    @Autowired
-    private CreditCardRepo repo;
-
     //Get all CreditCards
     @GetMapping("/all")
     public Flux<CreditCard> getAllCards()
     {
         return service.findAllCreditCards();
+    }
+
+    //Get all CreditCards (DTO)
+    @GetMapping("/alldto")
+    public Flux<CreditCardDTO> getAllCardsDTO()
+    {
+        return service.findAllCreditCardsDTO();
     }
 
     //Get card by number
@@ -43,11 +46,25 @@ public class CreditCardController
         return service.findCardByNumber(number);
     }
 
-    //Get card by owner
-    @GetMapping("/owner/{owner}")
-    public Mono<CreditCard> getCardByOwner(@PathVariable String owner)
+    //Get card by number (DTO)
+    @GetMapping("/numberdto/{number}")
+    public Mono<CreditCardDTO> getCardByNumberDTO(@PathVariable String number)
     {
-        return service.findCardByOwner(owner);
+        return service.findCardByNumberDTO(number);
+    }
+
+    //Get card by owner DNI
+    @GetMapping("/owner/{dni}")
+    public Mono<CreditCard> getCardByOwner(@PathVariable String dni)
+    {
+        return service.findCardByOwnerDni(dni);
+    }
+
+    //Get card by owner DNI (DTO)
+    @GetMapping("/ownerdto/{dni}")
+    public Mono<CreditCardDTO> getCardByOwnerDTO(@PathVariable String dni)
+    {
+        return service.findCardByOwnerDniDTO(dni);
     }
 
     //Create creditcard data
@@ -71,9 +88,9 @@ public class CreditCardController
 
     //Delete client data on db
     @DeleteMapping("/delete/{id}")
-    public Mono<Void> deleteCreditCard(@PathVariable String id)
+    public Mono<Void> deleteCreditCard(@PathVariable String number)
     {        
-        return repo.findById(id)
-                        .flatMap(card -> repo.delete(card));
+        return service.findCardByNumber(number)
+                        .flatMap(card -> service.delCard(card));
     }
 }

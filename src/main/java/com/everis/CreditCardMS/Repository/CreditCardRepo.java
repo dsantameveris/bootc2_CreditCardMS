@@ -11,4 +11,6 @@ public interface CreditCardRepo extends ReactiveMongoRepository<CreditCard, Stri
     Mono<CreditCard> findByNumber(String number);
 
     Mono<CreditCard> findByOwner(String owner);
+
+    Mono<CreditCard> findByOwner_Dni(String dni);
 }

@@ -2,6 +2,8 @@ package com.everis.CreditCardMS.Model;
 
 import javax.validation.constraints.NotBlank;
 
+import com.everis.CreditCardMS.Model.Secondary.Owner;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,11 +19,10 @@ public class CreditCard
     @NotBlank
     private String number;
 
-    @NotBlank
-    private String owner;
+    private Owner owner;
 
-    // @NotBlank
-    // private double balance;
+    @NotBlank
+    private double balance;
 
     @NotBlank
     private double max;
